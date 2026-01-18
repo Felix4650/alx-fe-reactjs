@@ -1,15 +1,7 @@
 function Footer() {
   return (
-    <footer
-      style={{
-        backgroundColor: '#222',
-        color: '#fff',
-        textAlign: 'center',
-        padding: '10px',
-        marginTop: '20px'
-      }}
-    >
-      <p>© 2026 My React App</p>
+    <footer style={{ backgroundColor: 'navy', color: 'white', textAlign: 'center' }}>
+      <p>Footer Content</p>
     </footer>
   );
 }
