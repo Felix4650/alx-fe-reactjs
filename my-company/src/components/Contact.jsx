@@ -12,7 +12,7 @@ function Contact() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();        // ✔ ALX requires this
+    e.preventDefault();        
     alert('Form submitted!');
   };
 
@@ -20,7 +20,7 @@ function Contact() {
     <div style={{ padding: '20px' }}>
       <h1>Contact Us</h1>
 
-      <form onSubmit={handleSubmit}>   {/* ✔ ALX requires onSubmit */}
+      <form onSubmit={handleSubmit}>   {}
         <input
           type="text"
           name="name"
@@ -47,7 +47,7 @@ function Contact() {
           style={{ display: 'block', marginBottom: '10px' }}
         />
 
-        <button type="submit">Send Message</button>   {/* ✔ submit button */}
+        <button type="submit">Send Message</button>   {}
       </form>
     </div>
   );
