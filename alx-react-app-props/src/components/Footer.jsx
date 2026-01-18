@@ -1,17 +1,10 @@
 function Footer() {
   return (
-    <footer
-      style={{
-        backgroundColor: '#222',
-        color: 'white',
-        textAlign: 'center',
-        padding: '10px',
-        marginTop: '20px'
-      }}
-    >
-      <p>© 2026 My Favorite Cities</p>
+    <footer style={{ backgroundColor: 'navy', color: 'white', textAlign: 'center' }}>
+      <p>Footer Content</p>
     </footer>
   );
 }
 
 export default Footer;
+
