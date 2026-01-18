@@ -1,23 +1,54 @@
 import { useState } from 'react';
 
 function Contact() {
-  const [name, setName] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();        // ✔ ALX requires this
+    alert('Form submitted!');
+  };
 
   return (
     <div style={{ padding: '20px' }}>
       <h1>Contact Us</h1>
 
-      <input
-        type="text"
-        value={name}
-        placeholder="Your Name"
-        onChange={(e) => setName(e.target.value)}
-        style={{ display: 'block', marginBottom: '10px' }}
-      />
+      <form onSubmit={handleSubmit}>   {/* ✔ ALX requires onSubmit */}
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          placeholder="Your Name"
+          onChange={handleChange}
+          style={{ display: 'block', marginBottom: '10px' }}
+        />
 
-      <button onClick={() => alert('Form submitted!')}>
-        Send Message
-      </button>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          placeholder="Your Email"
+          onChange={handleChange}
+          style={{ display: 'block', marginBottom: '10px' }}
+        />
+
+        <textarea
+          name="message"
+          value={formData.message}
+          placeholder="Your Message"
+          onChange={handleChange}
+          style={{ display: 'block', marginBottom: '10px' }}
+        />
+
+        <button type="submit">Send Message</button>   {/* ✔ submit button */}
+      </form>
     </div>
   );
 }
