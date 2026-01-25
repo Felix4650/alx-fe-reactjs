@@ -55,7 +55,7 @@ export const useRecipeStore = create((set, get) => ({
       favorites: state.favorites.filter(fid => fid !== id),
     })),
 
-  // Recommendations (mock logic)
+  // Recommendations
   generateRecommendations: () =>
     set(state => ({
       recommendations: state.recipes.filter(
@@ -63,3 +63,4 @@ export const useRecipeStore = create((set, get) => ({
       ),
     })),
 }));
+
