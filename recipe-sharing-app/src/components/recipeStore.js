@@ -7,12 +7,22 @@ export const useRecipeStore = create((set, get) => ({
   favorites: [],
   recommendations: [],
 
+  
+  setRecipes: (recipes) =>
+    set({
+      recipes,
+      filteredRecipes: recipes,
+    }),
+
   // CRUD
   addRecipe: (recipe) =>
-    set(state => ({
-      recipes: [...state.recipes, recipe],
-      filteredRecipes: [...state.recipes, recipe],
-    })),
+    set(state => {
+      const updated = [...state.recipes, recipe];
+      return {
+        recipes: updated,
+        filteredRecipes: updated,
+      };
+    }),
 
   updateRecipe: (updatedRecipe) =>
     set(state => ({
@@ -59,7 +69,8 @@ export const useRecipeStore = create((set, get) => ({
   generateRecommendations: () =>
     set(state => ({
       recommendations: state.recipes.filter(
-        recipe => !state.favorites.includes(recipe.id) && Math.random() > 0.5
+        recipe =>
+          !state.favorites.includes(recipe.id) && Math.random() > 0.5
       ),
     })),
 }));
