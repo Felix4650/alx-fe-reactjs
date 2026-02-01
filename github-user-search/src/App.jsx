@@ -1,4 +1,4 @@
-import Search from "./components/search.jsx";
+import Search from "./components/search";
 
 function App() {
   return (
@@ -10,5 +10,6 @@ function App() {
     </div>
   );
 }
+ 
 
 export default App;
