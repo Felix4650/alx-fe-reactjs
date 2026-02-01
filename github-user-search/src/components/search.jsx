@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { searchUsersAdvanced } from "../services/githubService";
+import { fetchUserData, searchUsersAdvanced } from "../services/githubService";
 
 const Search = () => {
   const [form, setForm] = useState({
@@ -23,12 +23,20 @@ const Search = () => {
     setUsers([]);
 
     try {
-      const data = await searchUsersAdvanced(
-        form.username,
-        form.location,
-        form.repos
-      );
-      setUsers(data.items);
+      let data;
+      if (!form.location && !form.repos) {
+        // Task 1 path: only username
+        data = await fetchUserData(form.username);
+        setUsers([data]); // wrap in array to keep rendering consistent
+      } else {
+        // Task 2 path: advanced search
+        data = await searchUsersAdvanced(
+          form.username,
+          form.location,
+          form.repos
+        );
+        setUsers(data.items);
+      }
     } catch {
       setError("Looks like we cant find the user");
     } finally {
@@ -38,10 +46,7 @@ const Search = () => {
 
   return (
     <div className="max-w-xl mx-auto p-4">
-      <form
-        onSubmit={handleSubmit}
-        className="grid gap-2 md:grid-cols-3"
-      >
+      <form onSubmit={handleSubmit} className="grid gap-2 md:grid-cols-3">
         <input
           name="username"
           placeholder="Username"
@@ -72,15 +77,13 @@ const Search = () => {
       <div className="grid gap-4 mt-4">
         {users.map((user) => (
           <div key={user.id} className="border p-4 flex gap-4">
-            <img
-              src={user.avatar_url}
-              className="w-16 rounded-full"
-            />
+            <img src={user.avatar_url} className="w-16 rounded-full" />
             <div>
               <h3 className="font-bold">{user.login}</h3>
               <a
                 href={user.html_url}
                 target="_blank"
+                rel="noreferrer"
                 className="text-blue-500"
               >
                 View Profile
