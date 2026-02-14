@@ -4,23 +4,38 @@ export default function AddRecipeForm() {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [steps, setSteps] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
+
+  // 👇 ALX wants "validate"
+  const validate = () => {
+    const newErrors = {};
+
+    if (!title.trim()) {
+      newErrors.title = "Title is required";
+    }
+
+    if (!ingredients.trim()) {
+      newErrors.ingredients = "Ingredients are required";
+    } else if (ingredients.split(",").length < 2) {
+      newErrors.ingredients = "Include at least two ingredients";
+    }
+
+    if (!steps.trim()) {
+      newErrors.steps = "Preparation steps are required";
+    }
+
+    return newErrors;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!title || !ingredients || !steps) {
-      setError("All fields are required.");
-      return;
-    }
+    const validationErrors = validate();
+    setErrors(validationErrors);
 
-    if (ingredients.split(",").length < 2) {
-      setError("Please include at least two ingredients.");
-      return;
+    if (Object.keys(validationErrors).length === 0) {
+      alert("Recipe Submitted Successfully!");
     }
-
-    setError("");
-    alert("Recipe Submitted Successfully!");
   };
 
   return (
@@ -33,31 +48,45 @@ export default function AddRecipeForm() {
           Add New Recipe
         </h2>
 
-        {error && (
-          <p className="text-red-500 mb-4 text-sm">{error}</p>
-        )}
-
+        {/* Title */}
         <input
           type="text"
           placeholder="Recipe Title"
-          className="w-full p-3 border rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full p-3 border rounded-lg mb-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
+        {errors.title && (
+          <p className="text-red-500 text-sm mb-3">
+            {errors.title}
+          </p>
+        )}
 
+        {/* Ingredients */}
         <textarea
           placeholder="Ingredients (comma separated)"
-          className="w-full p-3 border rounded-lg mb-4 h-24 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full p-3 border rounded-lg mb-2 h-24 focus:outline-none focus:ring-2 focus:ring-blue-400"
           value={ingredients}
           onChange={(e) => setIngredients(e.target.value)}
         />
+        {errors.ingredients && (
+          <p className="text-red-500 text-sm mb-3">
+            {errors.ingredients}
+          </p>
+        )}
 
+        {/* Steps */}
         <textarea
           placeholder="Preparation Steps"
-          className="w-full p-3 border rounded-lg mb-6 h-32 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full p-3 border rounded-lg mb-2 h-32 focus:outline-none focus:ring-2 focus:ring-blue-400"
           value={steps}
           onChange={(e) => setSteps(e.target.value)}
         />
+        {errors.steps && (
+          <p className="text-red-500 text-sm mb-4">
+            {errors.steps}
+          </p>
+        )}
 
         <button
           type="submit"
