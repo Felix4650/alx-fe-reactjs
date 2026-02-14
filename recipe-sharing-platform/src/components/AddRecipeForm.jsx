@@ -6,7 +6,7 @@ export default function AddRecipeForm() {
   const [steps, setSteps] = useState("");
   const [errors, setErrors] = useState({});
 
-  // 👇 ALX wants "validate"
+  
   const validate = () => {
     const newErrors = {};
 
