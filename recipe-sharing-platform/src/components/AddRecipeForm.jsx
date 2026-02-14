@@ -6,7 +6,7 @@ export default function AddRecipeForm() {
   const [steps, setSteps] = useState("");
   const [errors, setErrors] = useState({});
 
-  
+
   const validate = () => {
     const newErrors = {};
 
@@ -39,12 +39,12 @@ export default function AddRecipeForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4 md:p-8">
       <form
         onSubmit={handleSubmit}
-        className="bg-white w-full max-w-lg p-6 rounded-2xl shadow-lg"
+        className="bg-white w-full max-w-lg p-6 md:p-8 rounded-2xl shadow-lg"
       >
-        <h2 className="text-2xl font-bold mb-6 text-center">
+        <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">
           Add New Recipe
         </h2>
 
