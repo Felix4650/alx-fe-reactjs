@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
-import Post from "./components/post";
+import BlogPost from "./components/BlogPost";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         {/* Dynamic Route */}
-        <Route path="/post/:id" element={<Post />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
 
         {/* Protected Route */}
         <Route
