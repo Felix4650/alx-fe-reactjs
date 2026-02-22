@@ -20,8 +20,14 @@ function PostsComponent() {
     error,
     refetch,
   } = useQuery({
-    queryKey: ["posts"],   // Enables caching
+    queryKey: ["posts"],  
     queryFn: fetchPosts,
+
+    // caching config
+    staleTime: 1000 * 60 * 5,          // fresh data for 5 minutes
+    cacheTime: 1000 * 60 * 10,         // Cache for 10 minutes
+    refetchOnWindowFocus: false,       // Prevent auto refetch 
+    keepPreviousData: true,            // Old data during refetch
   });
 
   if (isLoading) {
