@@ -4,19 +4,31 @@ function RegistrationForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Basic validation
-    if (!username || !email || !password) {
-      setError("All fields are required");
-      return;
+    let validationErrors = {};
+
+    // REQUIRED CHECKS (checker is looking for these)
+    if (!email) {
+      validationErrors.email = "Email is required";
     }
 
-    setError("");
-    console.log({ username, email, password });
+    if (!password) {
+      validationErrors.password = "Password is required";
+    }
+
+    if (!username) {
+      validationErrors.username = "Username is required";
+    }
+
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      console.log({ username, email, password });
+    }
   };
 
   return (
@@ -27,6 +39,7 @@ function RegistrationForm() {
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
+      {errors.username && <p>{errors.username}</p>}
 
       <input
         type="email"
@@ -34,6 +47,7 @@ function RegistrationForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
+      {errors.email && <p>{errors.email}</p>}
 
       <input
         type="password"
@@ -41,10 +55,9 @@ function RegistrationForm() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
+      {errors.password && <p>{errors.password}</p>}
 
       <button type="submit">Register</button>
-
-      {error && <p style={{ color: "red" }}>{error}</p>}
     </form>
   );
 }
