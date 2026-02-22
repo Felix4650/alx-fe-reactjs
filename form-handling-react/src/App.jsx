@@ -1,6 +1,6 @@
 import { useState } from "react"; 
 import RegistrationForm from "./components/RegistrationForm";
-import FormikForm from "./components/FormikForm";
+import FormikForm from "./components/formikForm";
 
 function App() {
   const [useFormik, setUseFormik] = useState(false);
