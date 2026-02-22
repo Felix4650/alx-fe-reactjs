@@ -1,7 +1,7 @@
 /* eslint-env jest */
 
 import { render, screen, fireEvent } from "@testing-library/react";
-import TodoList from "../TodoList";
+import TodoList from "../components/TodoList";
 
 // eslint-disable-next-line no-undef
 describe("TodoList Component", () => {
